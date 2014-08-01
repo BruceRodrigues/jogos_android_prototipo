@@ -1,6 +1,7 @@
 package br.com.casadocodigo.impossible;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,21 +11,21 @@ import android.view.SurfaceView;
 
 /**
  * 
- * Classe responsável por executar o game loop
+ * Classe responsÔøΩvel por executar o game loop
  * e desenhar elemntos na tela
- * assim como detectar colisões.
+ * assim como detectar colisÔøΩes.
  * 
  * @author andersonleite
  *
  */
 class Impossible extends SurfaceView implements Runnable {
 	
-	// variáveis do android
+	// variÔøΩveis do android
 	Paint paint;
 	SurfaceHolder holder;
 	Thread renderThread = null;
 	
-	// variáveis do jogo
+	// variÔøΩveis do jogo
 	public int score;
 	private double distance;
 	private boolean gameover;
@@ -45,7 +46,7 @@ class Impossible extends SurfaceView implements Runnable {
 		renderThread.start();
 	}
 
-	// configurações iniciais
+	// configuraÔøΩÔøΩes iniciais
 	public void init() {
 		enemyX = enemyY = enemyRadius = 0;
 		playerX = playerY = 300;
@@ -65,16 +66,18 @@ class Impossible extends SurfaceView implements Runnable {
 
 			// desenha no canvas	
 			Canvas canvas = holder.lockCanvas();
-			canvas.drawColor(Color.BLACK);
+			//canvas.drawColor(Color.BLACK);
+			canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
+					R.drawable.sky), 0, 0, null);
 
 			// desenha jogador e inimigo
 			drawEnemy(canvas);
 			drawPlayer(canvas);
 
-			// desenha botões	
+			// desenha botÔøΩes	
 			drawButtons(canvas);
 
-			// detecta colisões	
+			// detecta colisÔøΩes	
 			checkCollision(canvas);
 
 			// atualiza placar	
@@ -86,7 +89,7 @@ class Impossible extends SurfaceView implements Runnable {
 		}
 	}
 
-	//desenha os botões
+	//desenha os botÔøΩes
 	private void drawButtons(Canvas canvas) {
 		paint.setStyle(Style.FILL);
 		paint.setColor(Color.WHITE);
@@ -100,10 +103,10 @@ class Impossible extends SurfaceView implements Runnable {
 
 	}
 
-	// verifica colisões	
+	// verifica colisÔøΩes	
 	private void checkCollision(Canvas canvas) {
 
-		// teorema de pitágoras	
+		// teorema de pitÔøΩgoras	
 		distance = Math.pow(playerY - enemyY, 2)
 				+ Math.pow(playerX - enemyX, 2);
 		distance = Math.sqrt(distance);
@@ -133,12 +136,15 @@ class Impossible extends SurfaceView implements Runnable {
 	//desenha o player
 	private void drawPlayer(Canvas canvas) {
 		paint.setColor(Color.GREEN);
-		canvas.drawCircle(playerX, playerY, playerRadius, paint);
+		//canvas.drawCircle(playerX, playerY, playerRadius, paint);
+		canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
+				R.drawable.nave), playerX-50, playerY-50, null);
+
 	}
 
 	// desenha o inimigo	
 	private void drawEnemy(Canvas canvas) {
-		paint.setColor(Color.GRAY);
+		paint.setColor(Color.RED);
 		enemyRadius++;
 		canvas.drawCircle(enemyX, enemyY, enemyRadius, paint);
 	}
