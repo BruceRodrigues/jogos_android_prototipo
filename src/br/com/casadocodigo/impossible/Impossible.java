@@ -66,9 +66,9 @@ class Impossible extends SurfaceView implements Runnable {
 
 			// desenha no canvas	
 			Canvas canvas = holder.lockCanvas();
-			//canvas.drawColor(Color.BLACK);
-			canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
-					R.drawable.sky), 0, 0, null);
+			
+			canvas.drawColor(Color.BLACK);
+			//altere para mudar o backgound para sky.png
 
 			// desenha jogador e inimigo
 			drawEnemy(canvas);
@@ -136,9 +136,10 @@ class Impossible extends SurfaceView implements Runnable {
 	//desenha o player
 	private void drawPlayer(Canvas canvas) {
 		paint.setColor(Color.GREEN);
-		//canvas.drawCircle(playerX, playerY, playerRadius, paint);
-		canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),
-				R.drawable.nave), playerX-50, playerY-50, null);
+		
+		canvas.drawCircle(playerX, playerY, playerRadius, paint);
+		// altere para a imagem nave.png
+		
 
 	}
 
@@ -151,11 +152,15 @@ class Impossible extends SurfaceView implements Runnable {
 
 	// move o player
 	public void moveDown(int pixels) { 
-		playerY += pixels;
+		
+		// incremente a posição Y do player com o número de pixels
+		
 	}
 
 	// soma pontos
 	public void addScore(int points) { 
-		score += points;
+		
+		// some os points ao score
+		
 	}
 }
